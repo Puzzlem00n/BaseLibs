@@ -15,13 +15,6 @@ function Player:initialize(x, y)
 end
 
 function Player:update()
-	if not love.keyboard.isDown("left","right") then
-		self.vx = 0
-	end
-	if not love.keyboard.isDown("up","down") then
-		self.vy = 0
-	end
-	
 	signvx = sign(self.vx)
 	if math.abs(self.vx) > tilesize then self.vx = signvx*tilesize end
 	if mapCollide(self.l + self.vx, self.t) or mapCollide(self.l + self.vx, self.t + self.h - 1) or mapCollide (self.l + self.vx, self.t + self.h / 2) then

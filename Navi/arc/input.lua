@@ -90,6 +90,13 @@ function _inp_area:run()
     self.iy,self.ivy = _inp_area.get_pos(self.iy,self.ivy,self.ny,self.nvy)
 end
 
+-- resets input area
+function _inp_area:reset()
+  self.btn = nil
+  self.ix,self.iy = 1,1
+  self.ivs,self.ivy = 1,1
+end
+
 -- draws cursor
 function _inp_area:draw_cursor(x,y)
     x,y = x or 0, y or 0
@@ -116,6 +123,13 @@ function _choice:new(l,nvy,xbar)
     o.xbar = xbar
     o.done = false
     return o
+end
+
+-- reset choice
+function _choice:reset()
+  self.done = false
+  self.pick = nil
+  self.ia:reset()
 end
 
 -- display list and cursor

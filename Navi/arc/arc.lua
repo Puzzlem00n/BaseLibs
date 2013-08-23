@@ -28,7 +28,7 @@ arc.col = {
 	gray = {128,128,128},
 	name = {255,255,0},
 	shadow = {0,0,0,192},
-	window = {20,20,20,192},
+	window = {0,80,160,192},
 	mred = {255,128,128},
 	mgreen = {128,255,128},
 	mblue = {128,192,255},
@@ -37,7 +37,7 @@ arc.col = {
 
 -- font
 arc.fn = {}
-arc.fn.f = lg.newFont(12)
+arc.fn.f = lg.newImageFont('fonts/font.png'," abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/():;%&`'*#=[]\"")
 arc.fn.h = arc.fn.f:getHeight()+2
 arc.fn.w = function(s) return arc.fn.f:getWidth(s) end
 lg.setFont(arc.fn.f)
@@ -57,14 +57,14 @@ arc.key = {
 
 -- images
 arc.img = {
-	cursor = lg.newImage('Navi/pics/cursor.png'),
-	blinker = lg.newImage('Navi/pics/press.png')
+	cursor = lg.newImage('pics/cursor.png'),
+	blinker = lg.newImage('pics/press.png')
 }
 
 -- sound effects
 arc.sfx = {
-	cursor = la.newSource('Navi/sounds/cursor.wav','static'),
-	confirm = la.newSource('Navi/sounds/confirm.wav','static')
+	cursor = la.newSource('sounds/cursor.wav','static'),
+	confirm = la.newSource('sounds/confirm.wav','static')
 }
 
 -- process directional keys

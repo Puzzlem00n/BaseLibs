@@ -253,7 +253,7 @@ function _navi:set_pos()
     self.ytext = y+10+self.dyname
     self.xchc = x+10+self.dxface
     self.ychc = y+10+self.dyname+arc.fn.h*self.nl+self.dytext+2
-    self.xblink = x+math.floor(0.75*(self.wbox) - 0.5*(arc.img.blinker:getWidth()))
+    self.xblink = x+math.floor(0.5*(self.wbox-arc.img.blinker:getWidth()))
     self.yblink = y+self.hbox-math.floor(0.5*arc.img.blinker:getHeight())
     self.clip = {self.xname,self.ytext,self.wll,self.hls}
 	-- if face_pos is 'r', make some changes...
@@ -278,6 +278,9 @@ function _navi:init()
     self.ci = 1
     self.view = 1
 	self.pick = nil
+  if self.chs then
+    self.cchs:reset()
+  end
 	-- handle keypresses and waits
 	for i = 1,#self.b do
 		self.b[i].done = nil

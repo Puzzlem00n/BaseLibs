@@ -1,9 +1,9 @@
 require "requirer"
-require "game"
 require "menu"
+require "game"
 
 function love.load()
-	gamestate = menu
+	changestate(menu)
 	paused = false
 	pausedopac = 0
 	maxframe = 0.1
@@ -31,6 +31,12 @@ function love.draw()
 	love.graphics.rectangle("fill", 0, 0, love.graphics:getWidth(), love.graphics:getHeight())
 	love.graphics.setColor(255,255,255,255)
 	--arc.clear_key()
+	--gui.core.draw()
+end
+
+function changestate(state)
+	gamestate = state
+	gamestate.load()
 end
 
 function love.mousepressed(x, y, button)
@@ -45,11 +51,12 @@ function love.mousereleased(x, y, button)
 	end
 end
 
-function love.keypressed(key, unicode)
+function love.keypressed(key, code)
 	if gamestate.keypressed then
 		gamestate.keypressed(key)
 	end
 	--arc.set_key(key)
+	--gui.keyboard.pressed(key, code)
 end
 
 function love.keyreleased(key)

@@ -1,4 +1,4 @@
-# Tim's Magical Bag of Assorted Libraries
+## Tim's Magical Bag of Assorted Libraries
 Everything I like to start out with before a game jam.
 
 ## Credits:

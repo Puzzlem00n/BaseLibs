@@ -3,9 +3,9 @@
 --anim8 = require "lib.anim8"
 --tween = require "lib.tween"
 --gamera = require "lib.gamera"
---gui = require "Quickie"
+--gui = require "gui"
 
---require "lib.middleclass"
+--class = require "lib.middleclass"
 --require "lib.Tserial"
 --require "lib.slam"
 

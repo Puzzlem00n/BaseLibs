@@ -9,7 +9,7 @@ function menu.update(dt)
 end
 
 function menu.keypressed(key)
-	if key == "return" then changestate(game)
+	if key == "return" then change(game)
 	elseif state == 1 and key == "up" then state = state + 1
 	elseif state == 2 and key == "up" then state = state + 1
 	elseif state == 3 and key == "down" then state = state + 1

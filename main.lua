@@ -3,7 +3,7 @@ require "menu"
 require "game"
 
 function love.load()
-	changestate(menu)
+	change(menu)
 	paused = false
 	pausedopac = 0
 	maxframe = 0.1
@@ -34,7 +34,8 @@ function love.draw()
 	--gui.core.draw()
 end
 
-function changestate(state)
+function change(state)
+	love.audio.stop()
 	gamestate = state
 	gamestate.load()
 end

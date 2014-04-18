@@ -4,6 +4,7 @@
 --cron = require "kikito.cron"
 --gamera = require "kikito.gamera"
 --class = require "kikito.middleclass"
+--Stateful = require "kikito.stateful"
 --tween = require "kikito.tween"
 
 --tiled = require "tiled"

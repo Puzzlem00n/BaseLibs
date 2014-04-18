@@ -1,12 +1,11 @@
 ## Tim's Magical Bag of Assorted Libraries
-Everything I like to start out with before a game jam.
+Stuff I start out with before a game jam. I usually don't need it all in the end, but it's best to be prepared!
 
 ## Credits:
-* Advanced Tiled Loader by Kadoba- Used to load from the Tiled editor: https://github.com/Kadoba/Advanced-Tiled-Loader
-* Navi by litearc- A RPG-style library for text boxes: https://love2d.org/forums/viewtopic.php?f=5&t=9265&sid=209959bbc46253d8948a7f5fb55f6b08
-* Quickie by vrld- A immediate mode GUI lib: https://github.com/vrld/Quickie
-* Slam by vrld- A sound manager that allows source instancing: https://github.com/vrld/slam
-* Bump, tween, anim8, middleclass, and gamera by kikito- They do a lot of things. Check his github here: https://github.com/kikito
-* Tserial by Taehl- Used for creating save files. https://love2d.org/wiki/Tserial
-
-Thanks to Inny, thelinx, YellowAfterLife and bartbes for ideas on what I coded myself.
+* LOTS OF STUFF by kikito- [Animations](https://github.com/kikito/anim8), [signals+slots](https://github.com/kikito/beholder.lua), [collision](https://github.com/kikito/bump.lua), [timers](https://github.com/kikito/cron.lua), [camera](https://github.com/kikito/gamera), [OO](https://github.com/kikito/middleclass)[P](https://github.com/kikito/stateful.lua), [tweens](https://github.com/kikito/tween.lua).
+* [Simple Tiled](https://github.com/karai17/Simple-Tiled-Implementation) by Karai17- Loads from [Tiled](http://www.mapeditor.org/).
+* [lume](https://github.com/rxi/lume) and [lurker](https://github.com/rxi/lurker) by rxi- Helper functions and hotswapping.
+* [Navi](https://github.com/cluke009/Navi) by litearc- RPG-style message boxes.
+* [GUI stuff](https://github.com/vrld/Quickie) by vrld- Menus and buttons.
+* [slam](https://github.com/vrld/slam) by vrld- Extra sound management stuff.
+* [Tserial](https://love2d.org/wiki/Tserial) by Taehl- Save files.

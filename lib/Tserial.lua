@@ -1,4 +1,4 @@
---- Tserial v1.5, a simple table serializer which turns tables into Lua script
+--- Tserial v1.51d, a simple table serializer which turns tables into Lua script
 -- @author Taehl (SelfMadeSpirit@gmail.com)
 Tserial = {}
 TSerial = Tserial	-- for backwards-compatibility
@@ -18,7 +18,9 @@ function Tserial.pack(t, drop, indent)
 		local tk, tv, skip = type(k), type(v)
 		if type(drop)=="table" and drop[k] then k = "["..drop[k].."]"
 		elseif tk == "boolean" then k = k and "[true]" or "[false]"
-		elseif tk == "string" then local f = string.format("%q",k) if f ~= '"'..k..'"' then k = '['..f..']' end
+		elseif tk == "string" then
+			local f = string.format("%q",k)
+			if f ~= '"'..k..'"' or string.find(k, " ") then k = '['..f..']' end
 		elseif tk == "number" then k = "["..k.."]"
 		elseif tk == "table" then k = "["..Tserial.pack(k, drop, indent and indent+1).."]"
 		elseif type(drop) == "function" then k = "["..string.format("%q",drop(k)).."]"
@@ -37,9 +39,9 @@ function Tserial.pack(t, drop, indent)
 		if not skip then return string.rep("\t",indent or 0)..(omitKey and "" or k.."=")..v..","..(indent and "\n" or "") end
 		return ""
 	end
-	local l=-1 repeat l=l+1 until t[l+1]==nil	-- #t "can" lie!
-	for i=1,l do s = s..proc(i, t[i], true) end	-- use ordered values when possible for better string
-	for k, v in pairs(t) do if not (type(k)=="number" and k<=l) then s = s..proc(k, v) end end
+	local l, did=-1,{} repeat l=l+1 until t[l+1]==nil	-- #t "can" lie!
+	for i=1,l do s = s..proc(i, t[i], true) did[i]=true end	-- use ordered values when possible for better string
+	for k, v in pairs(t) do if not did[k] then s = s..proc(k, v) end end
 	if not empty then s = string.sub(s,1,string.len(s)-1) end
 	if indent then s = string.sub(s,1,string.len(s)-1).."\n" end
 	return s..string.rep("\t",(indent or 1)-1).."}"

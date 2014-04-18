@@ -1,4 +1,3 @@
---loader = require "AdvTiledLoader.Loader"
 --bump = require "lib.bump"
 --anim8 = require "lib.anim8"
 --tween = require "lib.tween"

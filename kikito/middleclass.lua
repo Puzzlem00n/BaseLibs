@@ -1,10 +1,11 @@
 local middleclass = {
-  _VERSION     = 'middleclass v3.0.0',
+  _VERSION     = 'middleclass v3.0.1',
   _DESCRIPTION = 'Object Orientation for Lua',
+  _URL         = 'https://github.com/kikito/middleclass',
   _LICENSE     = [[
     MIT LICENSE
 
-    Copyright (c) 2011 Enrique García Cota
+    Copyright (c) 2011 Enrique GarcÃ­a Cota
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the

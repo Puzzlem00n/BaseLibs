@@ -319,7 +319,7 @@ end
 
 -- (Overridable) Given an item, return its bounding box (l,t,w,h)
 function bump.getBBox(item)
-	return item.l, item.t, item.w, item.h
+  return item:getBBox()
 end
 
 -- Adds an item to bump

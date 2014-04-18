@@ -1,4 +1,4 @@
-require "requirer"
+require "req"
 require "menu"
 require "game"
 

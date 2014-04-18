@@ -65,7 +65,7 @@ return function(w)
 	-- keyboard.makeCyclable makes the item focus on tab or whatever binding is
 	-- in place (see core.keyboard.cycle). Cycle order is determied by the
 	-- order you call the widget functions.
-	--**keyboard.makeCyclable(id)
+	keyboard.makeCyclable(id)
 
 	-- core.registerDraw(id, drawfunction, drawfunction-arguments...)
 	-- shows widget when core.draw() is called.

@@ -1,60 +1,51 @@
 require "req"
+require "states"
 require "menu"
 require "game"
+require "pause"
 
 function love.load()
-	change(menu)
-	paused = false
-	pausedopac = 0
+	gamestate = States:new()
+	gamestate:gotoState("Menu")
 	maxframe = 0.1
 	love.graphics.setBackgroundColor(255,255,255)
 end
 
 function love.update(dt)
-	if not paused then
-		local gdt = dt
-		while gdt > 0 do
-			local nowdt = math.min(maxframe, gdt)
-			gamestate.update(nowdt)
-			gdt = gdt - maxframe
-		end
-		if love.keyboard.isDown("escape") then
-			love.event.quit()
-		end
+	local gdt = dt
+	while gdt > 0 do
+		local nowdt = math.min(maxframe, gdt)
+		if gamestate.update then gamestate:update(nowdt) end
+		gdt = gdt - maxframe
+	end
+	if love.keyboard.isDown("escape") then
+		love.event.quit()
 	end
 	--arc.check_keys(dt)
 end
 
 function love.draw()
-	gamestate.draw()
-	love.graphics.setColor(0,0,0,pausedopac)
-	love.graphics.rectangle("fill", 0, 0, love.graphics:getWidth(), love.graphics:getHeight())
-	love.graphics.setColor(255,255,255,255)
+	if gamestate.draw then gamestate:draw() end
+	love.graphics.setColor(255,255,255)
 	--arc.clear_key()
 	--gui.core.draw()
 end
 
-function change(state)
-	love.audio.stop()
-	gamestate = state
-	gamestate.load()
-end
-
 function love.mousepressed(x, y, button)
 	if gamestate.mousepressed then
-		gamestate.mousepressed(x, y, button)
+		gamestate:mousepressed(x, y, button)
 	end
 end
 
 function love.mousereleased(x, y, button)
 	if gamestate.mousereleased then
-		gamestate.mousereleased(x, y, button)
+		gamestate:mousereleased(x, y, button)
 	end
 end
 
 function love.keypressed(key, code)
 	if gamestate.keypressed then
-		gamestate.keypressed(key)
+		gamestate:keypressed(key)
 	end
 	--arc.set_key(key)
 	--gui.keyboard.pressed(key, code)
@@ -62,19 +53,15 @@ end
 
 function love.keyreleased(key)
 	if gamestate.keyreleased then
-		gamestate.keyreleased(key)
+		gamestate:keyreleased(key)
 	end
 end
 
 function love.focus(f)
   if not f then
-    pausedopac = 170
-	love.audio.pause()
-	paused = true
+    gamestate:pushState("Pause")
   else
-    pausedopac = 0
-	love.audio.resume()
-	paused = false
+    gamestate:popState("Pause")
   end
 end
 

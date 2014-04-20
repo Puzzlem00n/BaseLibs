@@ -1,10 +1,11 @@
-game = {}
+Game = States:addState("Game")
 
-function game.load()
+function Game:enteredState()
+	self.below = Game
 end
 
-function game.update(dt)
+function Game:update(dt)
 end
 
-function game.draw()
+function Game:draw()
 end

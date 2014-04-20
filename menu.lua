@@ -1,29 +1,32 @@
-menu = {}
+Menu = States:addState("Menu")
 
-function menu.load()
-	menustring = "Press enter."
-	state = 1
+local step = 1
+local menustring = "Press enter!"
+
+function Menu:enteredState()
+	self.below = Menu
 end
 
-function menu.update(dt)
+function Menu:update(dt)
+	menustring = "Press enter!"
 end
 
-function menu.keypressed(key)
-	if key == "return" then change(game)
-	elseif state == 1 and key == "up" then state = state + 1
-	elseif state == 2 and key == "up" then state = state + 1
-	elseif state == 3 and key == "down" then state = state + 1
-	elseif state == 4 and key == "down" then state = state + 1
-	elseif state == 5 and key == "left" then state = state + 1
-	elseif state == 6 and key == "right" then state = state + 1
-	elseif state == 7 and key == "left" then state = state + 1
-	elseif state == 8 and key == "right" then state = state + 1
-	elseif state == 9 and key == "b" then state = state + 1
-	elseif state == 10 and key == "a" then menustring = "KONAMI MODE ACTIVATED."
-	else state = 1 end
+function Menu:keypressed(key)
+	if key == "return" then self:gotoState("Game")
+	elseif step == 1 and key == "up" then step = step + 1
+	elseif step == 2 and key == "up" then step = step + 1
+	elseif step == 3 and key == "down" then step = step + 1
+	elseif step == 4 and key == "down" then step = step + 1
+	elseif step == 5 and key == "left" then step = step + 1
+	elseif step == 6 and key == "right" then step = step + 1
+	elseif step == 7 and key == "left" then step = step + 1
+	elseif step == 8 and key == "right" then step = step + 1
+	elseif step == 9 and key == "b" then step = step + 1
+	elseif step == 10 and key == "a" then menustring = "KONAMI CODE."
+	else step = 1 end
 end
 
-function menu.draw()
+function Menu:draw()
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.print(menustring, 0, 0)
 end

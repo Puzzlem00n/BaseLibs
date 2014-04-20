@@ -15,8 +15,7 @@ end
 function Pause:update()
 end
 
-function Pause:draw()
-	self.below:draw()
+function Pause:drawOverlay()
 	love.graphics.setColor(0,0,0,170)
 	love.graphics.rectangle("fill",0,0,width,height)
 	love.graphics.setColor(255,255,255)

@@ -4,7 +4,6 @@ local step = 1
 local menustring = "Press enter!"
 
 function Menu:enteredState()
-	self.below = Menu
 end
 
 function Menu:update(dt)

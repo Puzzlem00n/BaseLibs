@@ -25,7 +25,7 @@ function love.update(dt)
 end
 
 function love.draw()
-	if gamestate.draw then gamestate:draw() end
+	gamestate:drawCalls()
 	love.graphics.setColor(255,255,255)
 	--arc.clear_key()
 	--gui.core.draw()

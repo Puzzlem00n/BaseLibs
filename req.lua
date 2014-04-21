@@ -12,7 +12,7 @@ Stateful = require "third.kikito.stateful"
 --gui = require "third.gui"
 
 lume = require "third.lume"
---lurker = require "third.lurker"
+lurker = require "third.lurker"
 
 --require "third.Tserial"
 --require "third.slam"

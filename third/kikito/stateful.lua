@@ -81,8 +81,9 @@ local function _assertType(val, name, expected_type, type_to_s)
   assert(type(val) == expected_type, "Expected " .. name .. " to be of type " .. (type_to_s or expected_type) .. ". Was " .. tostring(val) .. "(" .. type(val) .. ")")
 end
 
+--commented out for Lurker's sake
 local function _assertInexistingState(klass, stateName)
-  assert(klass.states[stateName] == nil, "State " .. tostring(stateName) .. " already exists on " .. tostring(klass) )
+  --assert(klass.states[stateName] == nil, "State " .. tostring(stateName) .. " already exists on " .. tostring(klass) )
 end
 
 local function _assertExistingState(self, state, stateName)

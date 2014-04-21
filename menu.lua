@@ -7,7 +7,6 @@ function Menu:enteredState()
 end
 
 function Menu:update(dt)
-	menustring = "Press enter!"
 end
 
 function Menu:keypressed(key)

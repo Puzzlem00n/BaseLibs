@@ -22,6 +22,7 @@ function love.update(dt)
 		love.event.quit()
 	end
 	--arc.check_keys(dt)
+	lurker.update(dt)
 end
 
 function love.draw()

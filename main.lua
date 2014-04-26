@@ -1,14 +1,16 @@
 require "req"
 require "states"
+require "pause"
+require "intro"
 require "menu"
 require "game"
-require "pause"
 
 function love.load()
 	gamestate = States:new()
-	gamestate:gotoState("Menu")
+	gamestate:gotoState("Intro")
 	maxframe = 0.1
 	love.graphics.setBackgroundColor(255,255,255)
+	width, height = love.graphics.getWidth(), love.graphics.getHeight()
 end
 
 function love.update(dt)

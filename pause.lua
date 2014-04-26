@@ -1,11 +1,8 @@
 Pause = States:addState("Pause")
-local width, height
 
 function Pause:enteredState()
 	love.audio.pause()
 	self.img = love.graphics.newImage("assets/pause.png")
-	width = love.graphics.getWidth()
-	height = love.graphics.getHeight()
 end
 
 function Pause:exitedState()

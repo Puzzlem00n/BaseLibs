@@ -2,7 +2,7 @@ Pause = States:addState("Pause")
 
 function Pause:enteredState()
 	love.audio.pause()
-	self.img = love.graphics.newImage("assets/pause.png")
+	self.sym = love.graphics.newImage("assets/pause.png")
 end
 
 function Pause:exitedState()
@@ -16,5 +16,5 @@ function Pause:drawOverlay()
 	love.graphics.setColor(0,0,0,170)
 	love.graphics.rectangle("fill",0,0,width,height)
 	love.graphics.setColor(255,255,255)
-	love.graphics.draw(self.img, width/2-100, height/2-100)
+	love.graphics.draw(self.sym, width/2-100, height/2-100)
 end

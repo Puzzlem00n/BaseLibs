@@ -7,7 +7,7 @@
 -- under the terms of the MIT license. See LICENSE for details.
 --
 
---local lume = require "lume"
+local lume = require "lume"
 
 local lurker = { _version = "1.0.1" }
 
@@ -90,14 +90,24 @@ end
 function lurker.onerror(e, nostacktrace)
   lurker.print("An error occurred; switching to error state")
   lurker.state = "error"
-  for _, v in pairs(lovecallbacknames) do
-    love[v] = function() end
-  end
-  love.update = lurker.update
-  
+ 
   -- Release mouse
   local setgrab = love.mouse.setGrab or love.mouse.setGrabbed
   setgrab(false)
+
+  -- Set up callbacks
+  for _, v in pairs(lovecallbacknames) do
+    love[v] = function() end
+  end
+
+  love.update = lurker.update
+
+  love.keypressed = function(k)
+    if k == "escape" then
+      lurker.print("Exiting...")
+      love.event.quit()
+    end
+  end
 
   local stacktrace = nostacktrace and "" or
                      lume.trim((debug.traceback("", 2):gsub("\t", "")))

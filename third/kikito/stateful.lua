@@ -1,5 +1,5 @@
--- stateful.lua - v1.0.1 (2011-10)
--- requires middleclass 2.0
+-- stateful.lua - v1.0.2 (2011-10)
+-- requires middleclass >2.0
 
 -- Copyright (c) 2011 Enrique García Cota
 -- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -81,7 +81,6 @@ local function _assertType(val, name, expected_type, type_to_s)
   assert(type(val) == expected_type, "Expected " .. name .. " to be of type " .. (type_to_s or expected_type) .. ". Was " .. tostring(val) .. "(" .. type(val) .. ")")
 end
 
---Comment out line 86 for lurker compatibility (more or less).
 local function _assertInexistingState(klass, stateName)
   assert(klass.states[stateName] == nil, "State " .. tostring(stateName) .. " already exists on " .. tostring(klass) )
 end
@@ -136,7 +135,7 @@ end
 
 function Stateful:gotoState(stateName, ...)
 
-  _invokeCallback(self, _getCurrentState(self), 'exitedState', ...)
+  self:popAllStates()
 
   if stateName == nil then
     self.__stateStack = { }

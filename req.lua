@@ -14,7 +14,6 @@ Stateful = require "third.kikito.stateful"
 lume = require "third.lume"
 --lurker = require "third.lurker"
 
---require "third.Tserial"
 --require "third.slam"
 
---navi = require "third.navi.arc"
+--navi = require "third.navi"

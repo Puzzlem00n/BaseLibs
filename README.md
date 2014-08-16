@@ -8,4 +8,3 @@ Stuff I start out with before a game jam. I usually don't need it all in the end
 * [Navi](https://github.com/cluke009/Navi) by litearc- RPG-style message boxes.
 * [GUI stuff](https://github.com/vrld/Quickie) by vrld- Menus and buttons.
 * [slam](https://github.com/vrld/slam) by vrld- Extra sound management stuff.
-* [Tserial](https://love2d.org/wiki/Tserial) by Taehl- Save files.

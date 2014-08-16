@@ -7,7 +7,7 @@
 -- under the terms of the MIT license. See LICENSE for details.
 --
 
-local lume = { _version = "1.3.1" }
+local lume = { _version = "1.4.1" }
 
 local pairs, ipairs = pairs, ipairs
 local type, assert, unpack = type, assert, unpack or table.unpack
@@ -30,7 +30,9 @@ local absindex = function(len, i)
 end
 
 local iscallable = function(x)
-  return type(x) == "function" or getmetatable(x).__call ~= nil
+  if type(x) == "function" then return true end
+  local mt = getmetatable(x)
+  return mt and mt.__call ~= nil
 end
 
 
@@ -57,7 +59,8 @@ end
 
 
 function lume.smooth(a, b, amount)
-  local m = (1 - math_cos(lume.clamp(amount, 0, 1) * math_pi)) / 2
+  local t = lume.clamp(amount, 0, 1)
+  local m = t * t * (3 - 2 * t)
   return a + (b - a) * m
 end
 
@@ -118,7 +121,7 @@ end
 
 function lume.array(...)
   local t = {}
-  for x in unpack({...}) do t[#t + 1] = x end
+  for x in ... do t[#t + 1] = x end
   return t
 end
 
@@ -134,7 +137,7 @@ end
 
 
 function lume.map(t, fn)
-  local rtn = {} 
+  local rtn = {}
   for k, v in pairs(t) do rtn[k] = fn(v) end
   return rtn
 end
@@ -168,7 +171,7 @@ end
 
 function lume.set(t, retainkeys)
   local rtn = {}
-  for k, v in pairs(lume.invert(t)) do 
+  for k, v in pairs(lume.invert(t)) do
     rtn[retainkeys and v or (#rtn + 1)] = k
   end
   return rtn
@@ -251,7 +254,7 @@ function lume.fn(fn, ...)
   local args = {...}
   return function(...)
     local a = lume.merge(lume.clone(args), {...})
-    return fn(unpack(a)) 
+    return fn(unpack(a))
   end
 end
 
@@ -267,19 +270,43 @@ function lume.once(fn, ...)
 end
 
 
-function lume.time(fn, ...)
-  local start = os.clock()
-  local rtn = {fn(...)}
-  return (os.clock() - start), unpack(rtn)
+local memoize_fnkey = {}
+local memoize_nil = {}
+
+function lume.memoize(fn)
+  local cache = {}
+  return function(...)
+    local c = cache
+    for i = 1, select("#", ...) do
+      local a = select(i, ...) or memoize_nil
+      c[a] = c[a] or {}
+      c = c[a]
+    end
+    c[memoize_fnkey] = c[memoize_fnkey] or {fn(...)}
+    return unpack(c[memoize_fnkey])
+  end
 end
 
 
 function lume.combine(...)
-  local funcs = {...}
-  assert(lume.all(funcs, iscallable), "expected all arguments to be functions")
+  local funcs = {}
+  for i = 1, select("#", ...) do
+    local fn = select(i, ...)
+    if fn ~= nil then
+      assert(iscallable(fn), "expected a function or nil")
+      funcs[#funcs + 1] = fn
+    end
+  end
   return function(...)
     for _, f in ipairs(funcs) do f(...) end
   end
+end
+
+
+function lume.time(fn, ...)
+  local start = os.clock()
+  local rtn = {fn(...)}
+  return (os.clock() - start), unpack(rtn)
 end
 
 
@@ -337,8 +364,8 @@ end
 
 function lume.format(str, vars)
   if not vars then return str end
-  local f = function(x) 
-    return tostring(vars[x] or vars[tonumber(x)] or "{" .. x .. "}") 
+  local f = function(x)
+    return tostring(vars[x] or vars[tonumber(x)] or "{" .. x .. "}")
   end
   return (str:gsub("{(.-)}", f))
 end
@@ -375,7 +402,7 @@ function lume.hotswap(modname)
   local oldglobal = lume.clone(_G)
   local updated = {}
   local function update(old, new)
-    if updated[old] then return end 
+    if updated[old] then return end
     updated[old] = true
     local oldmt, newmt = getmetatable(old), getmetatable(new)
     if oldmt and newmt then update(oldmt, newmt) end
@@ -395,7 +422,7 @@ function lume.hotswap(modname)
     local newmod = require(modname)
     if type(oldmod) == "table" then update(oldmod, newmod) end
     for k, v in pairs(oldglobal) do
-      if v ~= _G[k] and type(v) == "table" then 
+      if v ~= _G[k] and type(v) == "table" then
         update(v, _G[k])
         _G[k] = v
       end
@@ -408,9 +435,9 @@ end
 
 
 function lume.rgba(color)
-  local a = math_floor((color / 2 ^ 24) % 256)
-  local r = math_floor((color / 2 ^ 16) % 256)
-  local g = math_floor((color / 2 ^ 08) % 256)
+  local a = math_floor((color / 16777216) % 256)
+  local r = math_floor((color /    65536) % 256)
+  local g = math_floor((color /      256) % 256)
   local b = math_floor((color) % 256)
   return r, g, b, a
 end

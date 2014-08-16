@@ -18,22 +18,24 @@ function Map:init(path, fw)
 	end
 end
 
+-- https://github.com/stevedonovan/Penlight/blob/master/lua/pl/path.lua#L286
 function Map.formatPath(path)
-	local str = string.split(path, "/")
-	
-	for i, segment in pairs(str) do
-		if segment == ".." then
-			str[i]		= nil
-			str[i-1]	= nil
-		end
+	local np_gen1,np_gen2 = '[^SEP]+SEP%.%.SEP?','SEP+%.?SEP'
+	local np_pat1, np_pat2
+
+	if not np_pat1 then
+		np_pat1 = np_gen1:gsub('SEP','/')
+		np_pat2 = np_gen2:gsub('SEP','/')
 	end
-	
-	path = ""
-	for _, segment in pairs(str) do
-		path = path .. segment .. "/"
-	end
-	
-	return string.sub(path, 1, path:len()-1)
+	local k
+	repeat -- /./ -> /
+		path,k = path:gsub(np_pat2,'/')
+	until k == 0
+	repeat -- A/../ -> (empty)
+		path,k = path:gsub(np_pat1,'')
+	until k == 0
+	if path == '' then path = '.' end
+	return path
 end
 
 function Map:setTiles(index, tileset, gid)
@@ -68,7 +70,7 @@ function Map:setTiles(index, tileset, gid)
 			local properties
 			
 			for _, tile in pairs(tileset.tiles) do
-				if tile.id == gid - tileset.firstgid + 1 then
+				if tile.id == gid - tileset.firstgid then
 					properties = tile.properties
 				end
 			end
@@ -421,6 +423,10 @@ function Map:drawLayer(layer)
 end
 
 function Map:drawTileLayer(layer)
+	if type(layer) == "string" or type(layer) == "number" then
+		layer = self.layers[layer]
+	end
+
 	assert(layer.type == "tilelayer", "Invalid layer type: " .. layer.type .. ". Layer must be of type: tilelayer")
 	
 	local bw = layer.batches.width
@@ -448,6 +454,10 @@ function Map:drawTileLayer(layer)
 end
 
 function Map:drawObjectLayer(layer)
+	if type(layer) == "string" or type(layer) == "number" then
+		layer = self.layers[layer]
+	end
+
 	assert(layer.type == "objectgroup", "Invalid layer type: " .. layer.type .. ". Layer must be of type: objectgroup")
 	
 	local line		= { 160, 160, 160, 255 * layer.opacity }
@@ -540,6 +550,10 @@ function Map:drawObjectLayer(layer)
 end
 
 function Map:drawImageLayer(layer)
+	if type(layer) == "string" or type(layer) == "number" then
+		layer = self.layers[layer]
+	end
+
 	assert(layer.type == "imagelayer", "Invalid layer type: " .. layer.type .. ". Layer must be of type: imagelayer")
 	
 	if layer.image ~= "" then
@@ -589,7 +603,7 @@ function Map:drawCollisionMap(layer)
 end
 
 function Map:resize(w, h)
-	self.canvas = framework.newCanvas(w, h)
+	self.canvas = framework:newCanvas(w, h)
 end
 
 return Map

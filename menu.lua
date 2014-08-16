@@ -4,6 +4,7 @@ local step = 1
 local menustring = "Press enter!"
 
 function Menu:enteredState()
+	love.graphics.setBackgroundColor(230, 225, 206)
 end
 
 function Menu:update(dt)

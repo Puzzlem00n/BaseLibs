@@ -8,7 +8,6 @@ function love.load()
 	gamestate = States:new()
 	gamestate:gotoState("Menu")
 	maxframe = 0.1
-	love.graphics.setBackgroundColor(255,255,255)
 	width, height = love.graphics.getWidth(), love.graphics.getHeight()
 end
 
@@ -65,8 +64,4 @@ function love.focus(f)
   else
     gamestate:popState("Pause")
   end
-end
-
-function sign(x)
-	return x < 0 and -1 or (x > 0 and 1 or 0)
 end

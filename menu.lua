@@ -1,4 +1,4 @@
-Menu = States:addState("Menu")
+local Menu = States:addState("Menu")
 
 local step = 1
 local menustring = "Press enter!"
@@ -29,3 +29,5 @@ function Menu:draw()
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.print(menustring, 0, 0)
 end
+
+return menu

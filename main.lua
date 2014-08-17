@@ -1,8 +1,5 @@
 require "req"
 require "states"
-require "pause"
-require "menu"
-require "game"
 
 function love.load()
 	gamestate = States:new()

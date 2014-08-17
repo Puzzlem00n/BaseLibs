@@ -1,9 +1,9 @@
 local Game = States:addState("Game")
 
-local bumplib = require "third.kikito.bump"
+--local bumplib = require "third.kikito.bump"
 
 function Game:enteredState()
-	bump = bumplib.newWorld()
+	--bump = bumplib.newWorld(64)
 end
 
 function Game:update(dt)

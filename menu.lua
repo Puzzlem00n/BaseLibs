@@ -1,10 +1,11 @@
 local Menu = States:addState("Menu")
 
-local step = 1
+local step
 local menustring = "Press enter!"
 
 function Menu:enteredState()
 	love.graphics.setBackgroundColor(230, 225, 206)
+	step = 1
 end
 
 function Menu:update(dt)

@@ -2,9 +2,11 @@ local Sprite = class("Sprite")
 
 local micro = .000001
 
-function Sprite:initialize(x, y)
+function Sprite:initialize(x, y, w, h)
 	self.x = x
 	self.y = y
+	self.w = w
+	self.h = h
 	self.vx = 0
 	self.vy = 0
 	bump:add(self, self.x, self.y, self.w, self.h)

@@ -32,8 +32,9 @@ function Player:update(dt)
 		self.vy = 0
 	end
 	
-	local x, y, nx, ny = tile.tileCheck(self)
-	self.x, self.y = x, y
+	local cols = tile.collide(self)
+	self.x, self.y = cols.x, cols.y
+	self.vx, self.vy = cols.vx, cols.vy
 end
 
 function Player:draw()

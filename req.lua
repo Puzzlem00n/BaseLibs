@@ -6,6 +6,7 @@
 class = require "lib.kikito.middleclass"
 Stateful = require "lib.kikito.stateful"
 --tween = require "lib.kikito.tween"
+--bresenham = require "lib.kikito.bresenham"
 
 --tiled = require "lib.tiled"
 

@@ -19,7 +19,7 @@ local function checkPointAxis(x, y, axis)
 	return ans
 end
 
---A shortcut to checkMapPoint() that can check three coordinates at a time.
+--A shortcut to point checking that can check three coordinates at a time.
 local function checkPoints(edge, t, axis)
 	if checkPointAxis(t[1], edge, axis) or
 	checkPointAxis(t[2], edge, axis) or
@@ -102,10 +102,6 @@ end
 --OVERRIDABLE. Returns true if the given point on the tile grid is solid,
 --i.e. should be collided with.
 function tile.checkGrid(x, y)
-	local check = map[x + 1][y + 1]
-	if check == 1 then
-		return true
-	end
 end
 
 return tile

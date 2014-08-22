@@ -33,7 +33,7 @@ function Player:update(dt)
 	end
 	
 	local cols = tile.collide(self)
-	self.x, self.y = cols.x, cols.y
+	self:move(cols.x, cols.y)
 	self.vx, self.vy = cols.vx, cols.vy
 end
 

@@ -2,7 +2,7 @@ local Game = States:addState("Game")
 
 --local bumplib = require "third.kikito.bump"
 Player = require "ents.player"
-tile = require "tile"
+tile = require "lib.tile"
 
 function Game:enteredState()
 	--bump = bumplib.newWorld(64)
@@ -43,6 +43,13 @@ function Game:draw()
 		end
 	end
 	player:draw()
+end
+
+function tile.checkGrid(x, y)
+	local check = map[x + 1][y + 1]
+	if check == 1 then
+		return true
+	end
 end
 
 return Game

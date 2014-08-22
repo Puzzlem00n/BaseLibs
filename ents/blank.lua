@@ -1,4 +1,4 @@
-Sprite = require "sprite"
+local Sprite = require "sprite"
 local Blank = class("Blank", Sprite)
 
 function Blank:initialize(x, y)

@@ -7,7 +7,8 @@
 -- under the terms of the MIT license. See LICENSE for details.
 --
 
-local lume = require "lume"
+-- Assumes lume is in the same directory as this file
+local lume = require((...):gsub("[^/.\\]+$", "lume"))
 
 local lurker = { _version = "1.0.1" }
 
@@ -17,9 +18,17 @@ local isdir = love.filesystem.isDirectory
 local time = love.timer.getTime or os.time
 local lastmodified = love.filesystem.getLastModified
 
-local lovecallbacknames = { "update", "load", "draw", "mousepressed",
-                            "mousereleased", "keypressed", "keyreleased",
-                            "focus", "quit" }
+local lovecallbacknames = {
+  "update",
+  "load",
+  "draw",
+  "mousepressed",
+  "mousereleased",
+  "keypressed",
+  "keyreleased",
+  "focus",
+  "quit",
+}
 
 
 function lurker.init()

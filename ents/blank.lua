@@ -1,4 +1,4 @@
-Sprite = require Sprite
+local Sprite = require "sprite"
 local Blank = class("Blank", Sprite)
 
 function Blank:initialize(x, y)
@@ -10,3 +10,5 @@ end
 
 function Blank:draw()
 end
+
+return Blank

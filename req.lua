@@ -1,19 +1,19 @@
---anim8 = require "third.kikito.anim8"
---_ = require "third.kikito.beholder"
---bump = require "third.kikito.bump"
---cron = require "third.kikito.cron"
---gamera = require "third.kikito.gamera"
-class = require "third.kikito.middleclass"
-Stateful = require "third.kikito.stateful"
---tween = require "third.kikito.tween"
+--anim8 = require "lib.kikito.anim8"
+--_ = require "lib.kikito.beholder"
+--bump = require "lib.kikito.bump"
+--cron = require "lib.kikito.cron"
+--gamera = require "lib.kikito.gamera"
+class = require "lib.kikito.middleclass"
+Stateful = require "lib.kikito.stateful"
+--tween = require "lib.kikito.tween"
 
---tiled = require "third.tiled"
+--tiled = require "lib.tiled"
 
---gui = require "third.gui"
+--gui = require "lib.gui"
 
---l = require "third.lume"
---lurker = require "third.lurker"
+--l = require "lib.lume"
+--lurker = require "lib.lurker"
 
---require "third.slam"
+--require "lib.slam"
 
---navi = require "third.navi"
+--navi = require "lib.navi"

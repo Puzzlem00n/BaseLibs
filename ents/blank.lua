@@ -1,4 +1,4 @@
-local Sprite = require "sprite"
+local Sprite = require "ents.sprite"
 local Blank = class("Blank", Sprite)
 
 function Blank:initialize(x, y)

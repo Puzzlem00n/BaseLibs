@@ -1,3 +1,5 @@
+--gui = require "lib.gui"
+
 --anim8 = require "lib.kikito.anim8"
 --_ = require "lib.kikito.beholder"
 --bump = require "lib.kikito.bump"
@@ -6,15 +8,14 @@
 class = require "lib.kikito.middleclass"
 Stateful = require "lib.kikito.stateful"
 --tween = require "lib.kikito.tween"
---bresenham = require "lib.kikito.bresenham"
+
+--navi = require "lib.navi"
 
 --tiled = require "lib.tiled"
-
---gui = require "lib.gui"
 
 --l = require "lib.lume"
 --lurker = require "lib.lurker"
 
---require "lib.slam"
+--reptile = require "lib.reptile"
 
---navi = require "lib.navi"
+--require "lib.slam"

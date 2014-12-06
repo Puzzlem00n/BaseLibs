@@ -1,4 +1,29 @@
-local tile = {}
+local reptile = {
+	_LICENSE = [[
+    MIT LICENSE
+
+    Copyright (c) 2014 Timothy Bumpus
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  ]]
+}
 
 local micro = .001
 local tileSize
@@ -11,11 +36,11 @@ end
 --Slightly faster version of math.min()
 local function min(a,b) return a < b and a or b end
 
---Decides how to order the parameters passed to tile.checkPoint to supposedly reduce
+--Decides how to order the parameters passed to reptile.checkPoint to supposedly reduce
 --complications. If axis is true, the x axis is being checked, and y otherwise.
 local function checkPointAxis(x, y, axis)
-	if axis then ans = tile.checkPoint(x, y)
-	else ans = tile.checkPoint(y, x) end
+	if axis then ans = reptile.checkPoint(x, y)
+	else ans = reptile.checkPoint(y, x) end
 	return ans
 end
 
@@ -73,16 +98,16 @@ end
 
 --Public interface:
 
---Sets the size of each tile in the grid.
-function tile.setSize(x) tileSize = x return tileSize end
+--For now, sets the size of each tile in the grid.
+function reptile.setSize(x) tileSize = x end
 
 --Gets the size of each tile in the grid.
-function tile.getSize() return tileSize end
+function reptile.getSize() return tileSize end
 
 --Takes a table of rectangle coors, dimensions and velocities. Returns a
 --table with post-collision coors, velocities and normals for each axis.
-function tile.collide(rect)
-	local x, y = rect.x, rect.y
+function reptile.collide(rect)
+	local x, y = rect.l, rect.t
 	local nx, ny = 0
 	local w, h = rect.w, rect.h
 	local vx, vy = rect.vx, rect.vy
@@ -91,17 +116,17 @@ function tile.collide(rect)
 	
 	y, vy, ny = collideNoTunnel(y,x,h,w,vy,true)
 	
-	return {x = x, y = y, vx = vx, vy = vy, nx = nx, ny = ny}
+	return {l = x, t = y, vx = vx, vy = vy, nx = nx, ny = ny}
 end
 
 --Converts pixel coordinates to grid coordinates and passes them to checkGrid.
-function tile.checkPoint(x, y)
-	return tile.checkGrid(math.floor(y/tileSize), math.floor(x/tileSize))
+function reptile.checkPoint(x, y)
+	return reptile.checkGrid(math.floor(y/tileSize), math.floor(x/tileSize))
 end
 
 --OVERRIDABLE. Returns true if the given point on the tile grid is solid,
 --i.e. should be collided with.
-function tile.checkGrid(x, y)
+function reptile.checkGrid(x, y)
 end
 
-return tile
+return reptile

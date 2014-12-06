@@ -25,20 +25,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ]]--
 
-local STI = {}
+local STI = {
+	_LICENSE = "STI is distributed under the terms of the MIT license. See LICENSE.md.",
+	_URL = "https://github.com/karai17/Simple-Tiled-Implementation",
+	_VERSION = "0.9.4",
+	_DESCRIPTION = "Simple Tiled Implementation is a Tiled Map Editor library designed for the *awesome* LÖVE framework."
+}
 
-STI.version = "0.7.5"
-
-local path = ...
-local Map = require(path .. ".map")
+local path = ... .. "." -- lol
+local Map = require(path .. "map")
 local framework
 
 if love then
-	framework = require(path .. ".framework.love")
+	framework = require(path .. "framework.love")
 elseif corona then -- I don't think this works
-	framework = require(path .. ".framework.corona")
+	framework = require(path .. "framework.corona")
 else
-	framework = require(path .. ".framework.pure")
+	framework = require(path .. "framework.pure")
 end
 
 function STI.new(map)
@@ -54,15 +57,6 @@ function STI.new(map)
 	map = framework.load(map)
 	setfenv(map, {})
 	map = setmetatable(map(), {__index = Map})
-	
-	map.canvas		= framework:newCanvas()
-	map.tiles		= {}
-	map.drawRange	= {
-		sx = 1,
-		sy = 1,
-		ex = map.width,
-		ey = map.height,
-	}
 	
 	map:init(path, framework)
 	
